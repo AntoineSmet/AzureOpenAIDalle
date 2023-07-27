@@ -1,6 +1,6 @@
 # 🧾Azure OpenAi DallE Api (preview)
 
-⚠️Only available in WEST US ⚠️
+⚠️Only available in EAST US ⚠️
 
 ## ⚗️ Need
 
