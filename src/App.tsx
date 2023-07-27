@@ -5,10 +5,11 @@ import axios from "axios";
 
 function App() {
   const [prompt, setPrompt] = useState<string>("");
-
+  const [loading, setLoading] = useState<boolean>(false);
   const [urlData, setURLData] = useState<any | null>(null);
 
   const makeRequest = async () => {
+    setLoading(true);
     const apiUrl = `${
       import.meta.env.VITE_AZURE_OPENAI_URL_BASE as string
     }/openai/images/generations:submit?api-version=2023-06-01-preview`;
@@ -44,6 +45,7 @@ function App() {
       });
       if (response.data.status === "succeeded") {
         setURLData(response.data.result.data[0].url);
+        setLoading(false);
       } else {
         setTimeout(() => getRequestData(id), 1000);
       }
@@ -66,7 +68,11 @@ function App() {
             Show picture
           </button>
         </div>
-        {urlData && <img src={urlData} />}
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          urlData && <img src={urlData} />
+        )}
       </div>
     </div>
   );
